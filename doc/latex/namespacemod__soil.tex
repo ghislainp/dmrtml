@@ -1,0 +1,102 @@
+\hypertarget{namespacemod__soil}{
+\section{mod\_\-soil Module Reference}
+\label{namespacemod__soil}\index{mod\_\-soil@{mod\_\-soil}}
+}
+
+
+Description of soil properties and calculation of the reflection coefficients.  
+
+
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{typemod__soil_1_1soilparams}{soilparams}
+\begin{DoxyCompactList}\small\item\em This type provides information on the soil (type of reflection model, soil properties, ...) used as input of the subroutine \hyperlink{namespacemod__soil_addfafc544d6649e3cf0bec775d55996e}{soil\_\-coefficients\_\-multiangle}. The imodel and temp variables are required. Other variables are used or not depending on imodel (see the code of \hyperlink{namespacemod__soil_addfafc544d6649e3cf0bec775d55996e}{soil\_\-coefficients\_\-multiangle} for details) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacemod__soil_addfafc544d6649e3cf0bec775d55996e}{soil\_\-coefficients\_\-multiangle} (eps\_\-upper, soilp, frequency, mhu, rv, rh)
+\begin{DoxyCompactList}\small\item\em Compute the reflection coefficients of the soil at several angles. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Description of soil properties and calculation of the reflection coefficients. 
+
+\subsection{Function/Subroutine Documentation}
+\hypertarget{namespacemod__soil_addfafc544d6649e3cf0bec775d55996e}{
+\index{mod\_\-soil@{mod\_\-soil}!soil\_\-coefficients\_\-multiangle@{soil\_\-coefficients\_\-multiangle}}
+\index{soil\_\-coefficients\_\-multiangle@{soil\_\-coefficients\_\-multiangle}!mod_soil@{mod\_\-soil}}
+\subsubsection[{soil\_\-coefficients\_\-multiangle}]{\setlength{\rightskip}{0pt plus 5cm}subroutine mod\_\-soil::soil\_\-coefficients\_\-multiangle (
+\begin{DoxyParamCaption}
+\item[{complex$\ast$8,intent(in)}]{eps\_\-upper, }
+\item[{type(soilparams),intent(in)}]{soilp, }
+\item[{real$\ast$8,intent(in)}]{frequency, }
+\item[{real$\ast$8,dimension(:),intent(in)}]{mhu, }
+\item[{real$\ast$8,dimension(:),intent(out)}]{rv, }
+\item[{real$\ast$8,dimension(:),intent(out)}]{rh}
+\end{DoxyParamCaption}
+)}}
+\label{namespacemod__soil_addfafc544d6649e3cf0bec775d55996e}
+
+
+Compute the reflection coefficients of the soil at several angles. 
+
+This subroutine dispatches the calculation depending on the type of interface and/or soil models. Available models include:
+
+
+\begin{DoxyItemize}
+\item imodel=0 no soil (rh=rv=0)
+\item imodel=1 flat surface, fresnel coefficient with prescribed dieletric constant
+\item imodel=2 flat surface, fresnel coefficient with dieletric constant calculated with HUT EPSS.m code (Pulliainen et al., 1999)
+\item imodel=3 flat surface, fresnel coefficient with dieletric constant calculated with Dobson et al. (1985)
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item imodel=101 Wegmüller \& Mätzler (1999) reflectivity for rough surface with prescribed dieletric constant
+\item imodel=102 Wegmüller \& Mätzler (1999) reflectivity for rough surface with dieletric constant calculated with HUT EPSS.m code (Pulliainen et al., 1999)
+\item imodel=103 Wegmüller \& Mätzler (1999) reflectivity for rough surface with dieletric constant calculated with Dobson et al. (1985)
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item imodel=201 ice flat surface, fresnel coefficient with prescribed dielectric constant (equivalent to imodel=1)
+\item imodel=202 ice flat surface, fresnel coefficient with ice dielectric constant model.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item imodel=301 QHmodel (Wang et al. 1983) for rough surface with prescribed dieletric constant
+\item imodel=302 QHmodel (Wang et al. 1983) for rough surface with dieletric constant calculated with HUT EPSS.m code (Pulliainen et al., 1999)
+\item imodel=303 QHmodel (Wang et al. 1983) for rough surface with dieletric constant calculated with Dobson et al. (1985)
+\end{DoxyItemize}
+
+This list can be extended by users by choosing a unique number as model ID (recommended: over 10000 and model familly as multiple of 100). Please consider to share your piece of code for inclusion in the main distribution of DMRTML (ghislain dot picard at ujf-\/grenoble fr)
+
+The soil properties are described by filling the parameter soilp of type(\hyperlink{typemod__soil_1_1soilparams}{soilparams}).
+
+This subroutine is automatically called by mldisort (see \hyperlink{namespacemod__disort}{mod\_\-disort}).
+
+REFERENCES:
+
+Pulliainen, J.T., J. Grandell and M.T. Hallikainen. 1999. HUT snow emission model and its applicability to snow water equivalent retrieval. IEEE Trans. Geosci. Remote Sens., 37(3), 1378–1390.
+
+Dobson, M.C., Ulaby, F.T., Hallikainen, M.T., El-\/Rayes, M.A. 1985. Microwave dielectric behavior of wet soil-\/part II : dielectric miximg models. IEEE transanctions on geoscience and remote sensing. vol.GE-\/23 (1). 35-\/46.
+
+Wang, J.R., O'Neill, P.E. Jackson, T.J., Engman, E.T. (1983) Multifrequency measurements of the effects of soil moisture, soil texture and surface roughness, IEEE transactions on geoscience and remote sensing, vol.GE-\/21(1), p.44-\/51.
+
+Wegmuller, U. \& Matzler, C. Rough bare soil reflectivity model. Geoscience and Remote Sensing, IEEE Transactions on 37, 1391–1395 (1999). 
+\begin{DoxyParams}{Parameters}
+{\em eps\_\-upper} & Effective dielectric constant of the layer above the soil\\
+\hline
+{\em soilp} & Soil parameters, see \hyperlink{typemod__soil_1_1soilparams}{soilparams} for the documentation\\
+\hline
+{\em frequency} & Frequency (Hz)\\
+\hline
+{\em mhu} & Cosines in the layer above the soil\\
+\hline
+{\em rv} & V-\/pol reflection coefficients for the given cosines\\
+\hline
+{\em rh} & H-\/pol reflection coefficients for the given cosines \\
+\hline
+\end{DoxyParams}

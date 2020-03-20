@@ -1,0 +1,179 @@
+\hypertarget{namespacemod__dmrtparmeters}{
+\section{mod\_\-dmrtparmeters Module Reference}
+\label{namespacemod__dmrtparmeters}\index{mod\_\-dmrtparmeters@{mod\_\-dmrtparmeters}}
+}
+
+
+Compute dense media radiative transfer parameters (extinction and single scattering albedo) under various assumptions.  
+
+
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacemod__dmrtparmeters_a786ad3cc8541177f7049a0e9ca2ba7c0}{dmrtparameters\_\-grody} (frequency, temperature, f, a, tau, wetness, medium, Eeff0, Eeff, albedo, beta, Eice)
+\begin{DoxyCompactList}\small\item\em Compute radiative transfer parameters (extinction and single scattering albedo) using DMRT theory under the approximations: QCA-\/CP, small particules, sticky short range, single species. An empirical correction for large particule inspired from Grody is applied. This correction is far from perfect but avoids DMRT to diverge for large particules. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemod__dmrtparmeters_a5382940ff2d1907951e3e57b9d5add23}{dmrtparameters} (frequency, temperature, f, a, tau, wetness, medium, Eeff0, Eeff, albedo, beta, Eice)
+\begin{DoxyCompactList}\small\item\em Compute radiative transfer parameters (extinction and single scattering albedo) using DMRT theory under the assumption: QCA-\/CP, small particules, sticky short range, single species. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemod__dmrtparmeters_af54bb3110997d9f2fb5673c3b31c0e49}{dmrtparameters\_\-dist} (frequency, temperature, f, a, tau, wetness, medium, Eeff0, Eeff, albedo, beta, Eice)
+\begin{DoxyCompactList}\small\item\em Compute radiative transfer parameters (extinction and single scattering albedo) using DMRT theory under the assumptions: QCA-\/CP, small particules, $\ast$none-\/sticky$\ast$, multispecies. Grain size repartition is given by a Rayleigh distribution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Compute dense media radiative transfer parameters (extinction and single scattering albedo) under various assumptions. 
+
+\subsection{Function/Subroutine Documentation}
+\hypertarget{namespacemod__dmrtparmeters_a5382940ff2d1907951e3e57b9d5add23}{
+\index{mod\_\-dmrtparmeters@{mod\_\-dmrtparmeters}!dmrtparameters@{dmrtparameters}}
+\index{dmrtparameters@{dmrtparameters}!mod_dmrtparmeters@{mod\_\-dmrtparmeters}}
+\subsubsection[{dmrtparameters}]{\setlength{\rightskip}{0pt plus 5cm}subroutine mod\_\-dmrtparmeters::dmrtparameters (
+\begin{DoxyParamCaption}
+\item[{real$\ast$8,intent(in)}]{frequency, }
+\item[{real$\ast$8,intent(in)}]{temperature, }
+\item[{real$\ast$8,intent(in)}]{f, }
+\item[{real$\ast$8,intent(in)}]{a, }
+\item[{real$\ast$8,intent(in)}]{tau, }
+\item[{real$\ast$8,intent(in)}]{wetness, }
+\item[{character,intent(in)}]{medium, }
+\item[{complex$\ast$8,intent(out)}]{Eeff0, }
+\item[{complex$\ast$8,intent(out)}]{Eeff, }
+\item[{real$\ast$8,intent(out)}]{albedo, }
+\item[{real$\ast$8,intent(out)}]{beta, }
+\item[{complex$\ast$8,intent(in),optional}]{Eice}
+\end{DoxyParamCaption}
+)}}
+\label{namespacemod__dmrtparmeters_a5382940ff2d1907951e3e57b9d5add23}
+
+
+Compute radiative transfer parameters (extinction and single scattering albedo) using DMRT theory under the assumption: QCA-\/CP, small particules, sticky short range, single species. 
+
+Warning: this only works for short range, i.e. moderate stickiness / small grains (high tau value)!!
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frequency} & frequency in Hertz \\
+\hline
+\mbox{\tt in}  & {\em temperature} & temperature in Kelvin \\
+\hline
+\mbox{\tt in}  & {\em f} & fractional volume \\
+\hline
+\mbox{\tt in}  & {\em a} & radius in meter \\
+\hline
+\mbox{\tt in}  & {\em tau} & stickiness \\
+\hline
+\mbox{\tt in}  & {\em wetness} & fractional volume of water with respect to ice \\
+\hline
+\mbox{\tt in}  & {\em medium} & type of medium (valid value is S=Snow or I=ice with air bubbles) \\
+\hline
+\mbox{\tt out}  & {\em Eeff0} & effective dielectric constant, order 0 (=no scattering) \\
+\hline
+\mbox{\tt out}  & {\em Eeff} & effective dielectric constant \\
+\hline
+\mbox{\tt out}  & {\em albedo} & single scattering albedo \\
+\hline
+\mbox{\tt out}  & {\em beta} & extinction coefficient (also known as Ke) \\
+\hline
+\mbox{\tt in}  & {\em Eice} & optional dielectric constant of ice (don't use it) \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacemod__dmrtparmeters_af54bb3110997d9f2fb5673c3b31c0e49}{
+\index{mod\_\-dmrtparmeters@{mod\_\-dmrtparmeters}!dmrtparameters\_\-dist@{dmrtparameters\_\-dist}}
+\index{dmrtparameters\_\-dist@{dmrtparameters\_\-dist}!mod_dmrtparmeters@{mod\_\-dmrtparmeters}}
+\subsubsection[{dmrtparameters\_\-dist}]{\setlength{\rightskip}{0pt plus 5cm}subroutine mod\_\-dmrtparmeters::dmrtparameters\_\-dist (
+\begin{DoxyParamCaption}
+\item[{real$\ast$8,intent(in)}]{frequency, }
+\item[{real$\ast$8,intent(in)}]{temperature, }
+\item[{real$\ast$8,intent(in)}]{f, }
+\item[{real$\ast$8,intent(in)}]{a, }
+\item[{real$\ast$8,intent(in)}]{tau, }
+\item[{real$\ast$8,intent(in)}]{wetness, }
+\item[{character,intent(in)}]{medium, }
+\item[{complex$\ast$8,intent(out)}]{Eeff0, }
+\item[{complex$\ast$8,intent(out)}]{Eeff, }
+\item[{real$\ast$8,intent(out)}]{albedo, }
+\item[{real$\ast$8,intent(out)}]{beta, }
+\item[{complex$\ast$8,intent(in),optional}]{Eice}
+\end{DoxyParamCaption}
+)}}
+\label{namespacemod__dmrtparmeters_af54bb3110997d9f2fb5673c3b31c0e49}
+
+
+Compute radiative transfer parameters (extinction and single scattering albedo) using DMRT theory under the assumptions: QCA-\/CP, small particules, $\ast$none-\/sticky$\ast$, multispecies. Grain size repartition is given by a Rayleigh distribution. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frequency} & frequency in Herz \\
+\hline
+\mbox{\tt in}  & {\em temperature} & temperature in Kelvin \\
+\hline
+\mbox{\tt in}  & {\em f} & fractional volume \\
+\hline
+\mbox{\tt in}  & {\em a} & radius in meter \\
+\hline
+\mbox{\tt in}  & {\em tau} & stickiness (must be zero) \\
+\hline
+\mbox{\tt in}  & {\em wetness} & fractional volume of water with respect to ice \\
+\hline
+\mbox{\tt in}  & {\em medium} & type of medium (valid value is S=Snow or I=ice with air bubbles) \\
+\hline
+\mbox{\tt out}  & {\em Eeff0} & effective dielectric constant, order 0 (=no scattering) \\
+\hline
+\mbox{\tt out}  & {\em Eeff} & effective dielectric constant \\
+\hline
+\mbox{\tt out}  & {\em albedo} & single scattering albedo \\
+\hline
+\mbox{\tt out}  & {\em beta} & extinction coefficient (also known as Ke) \\
+\hline
+\mbox{\tt in}  & {\em Eice} & optional dielectric constant of ice (don't use it) \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacemod__dmrtparmeters_a786ad3cc8541177f7049a0e9ca2ba7c0}{
+\index{mod\_\-dmrtparmeters@{mod\_\-dmrtparmeters}!dmrtparameters\_\-grody@{dmrtparameters\_\-grody}}
+\index{dmrtparameters\_\-grody@{dmrtparameters\_\-grody}!mod_dmrtparmeters@{mod\_\-dmrtparmeters}}
+\subsubsection[{dmrtparameters\_\-grody}]{\setlength{\rightskip}{0pt plus 5cm}subroutine mod\_\-dmrtparmeters::dmrtparameters\_\-grody (
+\begin{DoxyParamCaption}
+\item[{real$\ast$8,intent(in)}]{frequency, }
+\item[{real$\ast$8,intent(in)}]{temperature, }
+\item[{real$\ast$8,intent(in)}]{f, }
+\item[{real$\ast$8,intent(in)}]{a, }
+\item[{real$\ast$8,intent(in)}]{tau, }
+\item[{real$\ast$8,intent(in)}]{wetness, }
+\item[{character,intent(in)}]{medium, }
+\item[{complex$\ast$8,intent(out)}]{Eeff0, }
+\item[{complex$\ast$8,intent(out)}]{Eeff, }
+\item[{real$\ast$8,intent(out)}]{albedo, }
+\item[{real$\ast$8,intent(out)}]{beta, }
+\item[{complex$\ast$8,intent(in),optional}]{Eice}
+\end{DoxyParamCaption}
+)}}
+\label{namespacemod__dmrtparmeters_a786ad3cc8541177f7049a0e9ca2ba7c0}
+
+
+Compute radiative transfer parameters (extinction and single scattering albedo) using DMRT theory under the approximations: QCA-\/CP, small particules, sticky short range, single species. An empirical correction for large particule inspired from Grody is applied. This correction is far from perfect but avoids DMRT to diverge for large particules. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frequency} & frequency in Hertz \\
+\hline
+\mbox{\tt in}  & {\em temperature} & temperature in Kelvin \\
+\hline
+\mbox{\tt in}  & {\em f} & fractional volume \\
+\hline
+\mbox{\tt in}  & {\em a} & radius in meter \\
+\hline
+\mbox{\tt in}  & {\em tau} & stickiness \\
+\hline
+\mbox{\tt in}  & {\em wetness} & fractional volume of water with respect to ice \\
+\hline
+\mbox{\tt in}  & {\em medium} & type of medium (valid value is S=Snow or I=ice with air bubbles) \\
+\hline
+\mbox{\tt out}  & {\em Eeff0} & effective dielectric constant, order 0 (=no scattering) \\
+\hline
+\mbox{\tt out}  & {\em Eeff} & effective dielectric constant \\
+\hline
+\mbox{\tt out}  & {\em albedo} & single scattering albedo \\
+\hline
+\mbox{\tt out}  & {\em beta} & extinction coefficient (also known as Ke) \\
+\hline
+\mbox{\tt in}  & {\em Eice} & optional dielectric constant of ice (don't use it) \\
+\hline
+\end{DoxyParams}

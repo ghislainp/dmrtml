@@ -1,0 +1,143 @@
+\hypertarget{namespacemod__dmrtml}{
+\section{mod\_\-dmrtml Module Reference}
+\label{namespacemod__dmrtml}\index{mod\_\-dmrtml@{mod\_\-dmrtml}}
+}
+
+
+Main entry point for the DMRT-\/ML model. Most users should use the subroutine \hyperlink{namespacemod__dmrtml_a94e501354576e7f5a2356c0dc4dfa5c9}{dmrtml}. This module includes subroutines to be called from Fortran as well as those exposed from Python (see dmrtml.py for the main python module)  
+
+
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacemod__dmrtml_a94e501354576e7f5a2356c0dc4dfa5c9}{dmrtml} (frequency, l, n, depth, density, radius, temperature, TbV, TbH, mhu, tau, wetness, medium, dist, soilp, Tbatmodown, profileV, profileH)
+\begin{DoxyCompactList}\small\item\em Compute the brightness temperatures (at H and V polarisations and for several angles) for a given frequency and layered medium. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemod__dmrtml_a61888a6420e93081837312de600ae86f}{albedobeta} (frequency, density, radius, temperature, albedo, beta, tau, wetness, medium, dist)
+\begin{DoxyCompactList}\small\item\em Compute the extinction and the single scattering albedo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Main entry point for the DMRT-\/ML model. Most users should use the subroutine \hyperlink{namespacemod__dmrtml_a94e501354576e7f5a2356c0dc4dfa5c9}{dmrtml}. This module includes subroutines to be called from Fortran as well as those exposed from Python (see dmrtml.py for the main python module) 
+
+\subsection{Function/Subroutine Documentation}
+\hypertarget{namespacemod__dmrtml_a61888a6420e93081837312de600ae86f}{
+\index{mod\_\-dmrtml@{mod\_\-dmrtml}!albedobeta@{albedobeta}}
+\index{albedobeta@{albedobeta}!mod_dmrtml@{mod\_\-dmrtml}}
+\subsubsection[{albedobeta}]{\setlength{\rightskip}{0pt plus 5cm}subroutine mod\_\-dmrtml::albedobeta (
+\begin{DoxyParamCaption}
+\item[{real$\ast$8,intent(in)}]{frequency, }
+\item[{real$\ast$8,intent(in)}]{density, }
+\item[{real$\ast$8,intent(in)}]{radius, }
+\item[{real$\ast$8,intent(in)}]{temperature, }
+\item[{real$\ast$8,intent(out)}]{albedo, }
+\item[{real$\ast$8,intent(out)}]{beta, }
+\item[{real$\ast$8,intent(in),optional}]{tau, }
+\item[{real$\ast$8,intent(in),optional}]{wetness, }
+\item[{character,intent(in),optional}]{medium, }
+\item[{logical,intent(in),optional}]{dist}
+\end{DoxyParamCaption}
+)}}
+\label{namespacemod__dmrtml_a61888a6420e93081837312de600ae86f}
+
+
+Compute the extinction and the single scattering albedo. 
+
+This subroutine is a convenience routine that calls one of the subroutine in the \hyperlink{namespacemod__dmrtparameters}{mod\_\-dmrtparameters} module and has a list of arguments similar to those in dmrtml. It is recommended to read the documentation of the \hyperlink{namespacemod__dmrtparameters}{mod\_\-dmrtparameters} module
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frequency} & frequency in Hertz. \\
+\hline
+\mbox{\tt in}  & {\em density} & density of Snow or bubbly Ice (in kg/m3). \\
+\hline
+\mbox{\tt in}  & {\em radius} & radius (in meter) of grains (for Snow) or bubbles (for Ice). \\
+\hline
+\mbox{\tt in}  & {\em temperature} & temperature (in Kelvin).\\
+\hline
+\mbox{\tt out}  & {\em albedo} & single scattering albedo. \\
+\hline
+\mbox{\tt out}  & {\em beta} & exctinction coefficient, also written Ke in some books.\\
+\hline
+\mbox{\tt in}  & {\em tau} & stickiness. If not present, none-\/sticky calculation (tau=infinity). \\
+\hline
+\mbox{\tt in}  & {\em wetness} & fractional volume of water with respect to ice. Default is 0. \\
+\hline
+\mbox{\tt in}  & {\em medium} & type of medium in each layer (valid value is S=Snow or I=ice with air bubbles). Default is Snow.\\
+\hline
+\mbox{\tt in}  & {\em distribution.} & If set to False a mono-\/disperse distribution is used, this is the default. If set to True a poly-\/disperse distribution of particules is used: Radii are taken from a Rayleigh distribution. The radius parameter in input corresponds to the optical radius (equivalent S/V grain size). \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacemod__dmrtml_a94e501354576e7f5a2356c0dc4dfa5c9}{
+\index{mod\_\-dmrtml@{mod\_\-dmrtml}!dmrtml@{dmrtml}}
+\index{dmrtml@{dmrtml}!mod_dmrtml@{mod\_\-dmrtml}}
+\subsubsection[{dmrtml}]{\setlength{\rightskip}{0pt plus 5cm}subroutine mod\_\-dmrtml::dmrtml (
+\begin{DoxyParamCaption}
+\item[{real$\ast$8,intent(in)}]{frequency, }
+\item[{integer,intent(in)}]{l, }
+\item[{integer,intent(in)}]{n, }
+\item[{real$\ast$8,dimension(l),intent(in)}]{depth, }
+\item[{real$\ast$8,dimension(l),intent(in)}]{density, }
+\item[{real$\ast$8,dimension(l),intent(in)}]{radius, }
+\item[{real$\ast$8,dimension(l),intent(in)}]{temperature, }
+\item[{real$\ast$8,dimension(n),intent(out)}]{TbV, }
+\item[{real$\ast$8,dimension(n),intent(out)}]{TbH, }
+\item[{real$\ast$8,dimension(n),intent(out)}]{mhu, }
+\item[{real$\ast$8,dimension(l),intent(in),optional}]{tau, }
+\item[{real$\ast$8,dimension(l),intent(in),optional}]{wetness, }
+\item[{character,dimension(l),intent(in),optional}]{medium, }
+\item[{logical,intent(in),optional}]{dist, }
+\item[{type({\bf soilparams}),intent(in),optional}]{soilp, }
+\item[{real$\ast$8,intent(in),optional}]{Tbatmodown, }
+\item[{real$\ast$8,dimension(n,l),intent(out),optional}]{profileV, }
+\item[{real$\ast$8,dimension(n,l),intent(out),optional}]{profileH}
+\end{DoxyParamCaption}
+)}}
+\label{namespacemod__dmrtml_a94e501354576e7f5a2356c0dc4dfa5c9}
+
+
+Compute the brightness temperatures (at H and V polarisations and for several angles) for a given frequency and layered medium. 
+
+The medium is characterized by the number of layers, the depth of each layer, the type of medium in each layer (Snow or bubbly Ice) and the lower interface (called soil but can also be pure ice, etc...). In the case of snow layers, the grain size, density and temperature are required parameters in every layer. Stickiness and wetness inputs are optional. In the case of bubbly ice, the bubble size, density and temperature are required and the stickiness is optional. In the future, medium of type Water will be added.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frequency} & frequency (Hz). \\
+\hline
+\mbox{\tt in}  & {\em l} & number of layers. \\
+\hline
+\mbox{\tt in}  & {\em n} & number of stream in the most refringent layer (see \hyperlink{namespacemod__disort}{mod\_\-disort} for details). \\
+\hline
+\mbox{\tt in}  & {\em depth} & depth/thickness (in meter) of each layer. \\
+\hline
+\mbox{\tt in}  & {\em density} & (kg/m3) of Snow or Ice in each layer. \\
+\hline
+\mbox{\tt in}  & {\em radius} & (m) of snow grains or air bubbles in each layer. \\
+\hline
+\mbox{\tt in}  & {\em temperature} & temperature (K) in each layer.\\
+\hline
+\mbox{\tt out}  & {\em TbV} & outgoing V-\/polarized brightness temperature (K) for every emerging streams. \\
+\hline
+\mbox{\tt out}  & {\em TbH} & outgoing H-\/polarized brightness temperature (K) for every emerging streams. \\
+\hline
+\mbox{\tt out}  & {\em mhu} & cosine angles in the air of the emerging streams.\\
+\hline
+\mbox{\tt in}  & {\em tau} & stickiness factor in each layer. If not present, none-\/sticky calculation (tau=infinity). \\
+\hline
+\mbox{\tt in}  & {\em wetness} & fractional volume of water with respect to volume of ice. Default is 0. \\
+\hline
+\mbox{\tt in}  & {\em medium} & type of medium in each layer (valid value is S=Snow or I=ice with air bubbles). Default is Snow.\\
+\hline
+\mbox{\tt in}  & {\em dist} & if True a poly-\/disperse distribution of particule size is considered. Radius is taken from a Rayleigh distribution. The radius parameter in input corresponds to the optical radius (equivalent S/V grain size). If False a mono-\/disperse distribution is used, this is the default. \\
+\hline
+\mbox{\tt in}  & {\em soilp} & description of the soil. See \hyperlink{namespacemod__soil}{mod\_\-soil} for details. \\
+\hline
+\mbox{\tt in}  & {\em Tbatmodown} & atmosphere downwelling brightness temperature (assumed isotropic and unpolarized). Can be used to compute snow emissivity (see \hyperlink{namespacemod__disort}{mod\_\-disort} for details). \\
+\hline
+\mbox{\tt out}  & {\em profileV} & if present and allocated, the computed profile of upwelling V-\/polarized Tb at the top of each layer (before being transmitted). \\
+\hline
+\mbox{\tt out}  & {\em profileH} & if present and allocated, the computed profile of upwelling H-\/polarized Tb at the top of each layer (before being transmitted).\\
+\hline
+\end{DoxyParams}
+This subroutine calculates for each layer the DMRT parameters (exctinction and single scattering albedo) using one of the subroutines in the \hyperlink{namespacemod__dmrtparameters}{mod\_\-dmrtparameters} module and then solves the radiative transfer equation with the DMRT parameters of each layer, the soil boundary conditions (if present) and the downwelling atmospheric contribution (if present) using the disort subroutine in the \hyperlink{namespacemod__disort}{mod\_\-disort} module. It is recommanded to read the documentation of both modules to understand the details. See also \hyperlink{namespacemod__soil}{mod\_\-soil} for describing the soil (or for modeling any kind of interfaces lying below the layers).
+
+The subroutine returns the brightness temperature at H and V polarization and at several angles given by acos(mhu). It is not possible to choose these angles in input because they are automatically determined in disortml to optimize the solution (i.e. they result from a gaussian quadrature in the most refringent layer and refraction in other layers (see \hyperlink{namespacemod__disort}{mod\_\-disort} for details). To compute the brightness temperature at a particular angle, it is recommand to use interpolation and/or increase the number of stream to refine the quadrature. Fortran users have to implement their own interpolation method. Python users can use the dmrtml.py module that implements linear interpolation. 

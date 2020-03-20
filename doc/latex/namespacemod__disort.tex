@@ -1,0 +1,93 @@
+\hypertarget{namespacemod__disort}{
+\section{mod\_\-disort Module Reference}
+\label{namespacemod__disort}\index{mod\_\-disort@{mod\_\-disort}}
+}
+
+
+Solve the radiative transfer equation in the passive microwave case for a layered plane-\/parallel medium.  
+
+
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacemod__disort_a0c03d70e31fb8642ede055b6c867e8bc}{mldisort} (l, n, depth, temp, Ke, albedo, eps, TbV, TbH, outmhu, soilp, frequency, Tbatmodown, profileV, profileH)
+\begin{DoxyCompactList}\small\item\em Solve the radiative transfer equation in the passive microwave case for a layered plane-\/parallel medium. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Solve the radiative transfer equation in the passive microwave case for a layered plane-\/parallel medium. 
+
+\subsection{Function/Subroutine Documentation}
+\hypertarget{namespacemod__disort_a0c03d70e31fb8642ede055b6c867e8bc}{
+\index{mod\_\-disort@{mod\_\-disort}!mldisort@{mldisort}}
+\index{mldisort@{mldisort}!mod_disort@{mod\_\-disort}}
+\subsubsection[{mldisort}]{\setlength{\rightskip}{0pt plus 5cm}subroutine mod\_\-disort::mldisort (
+\begin{DoxyParamCaption}
+\item[{integer,intent(in)}]{l, }
+\item[{integer,intent(in)}]{n, }
+\item[{real$\ast$8,dimension(l),intent(in)}]{depth, }
+\item[{real$\ast$8,dimension(l),intent(in)}]{temp, }
+\item[{real$\ast$8,dimension(l),intent(in)}]{Ke, }
+\item[{real$\ast$8,dimension(l),intent(in)}]{albedo, }
+\item[{complex$\ast$8,dimension(l),intent(in)}]{eps, }
+\item[{real$\ast$8,dimension(n),intent(out)}]{TbV, }
+\item[{real$\ast$8,dimension(n),intent(out)}]{TbH, }
+\item[{real$\ast$8,dimension(n),intent(out)}]{outmhu, }
+\item[{type({\bf soilparams}),intent(in),optional}]{soilp, }
+\item[{real$\ast$8,intent(in),optional}]{frequency, }
+\item[{real$\ast$8,intent(in),optional}]{Tbatmodown, }
+\item[{real$\ast$8,dimension(:,:),intent(out),optional}]{profileV, }
+\item[{real$\ast$8,dimension(:,:),intent(out),optional}]{profileH}
+\end{DoxyParamCaption}
+)}}
+\label{namespacemod__disort_a0c03d70e31fb8642ede055b6c867e8bc}
+
+
+Solve the radiative transfer equation in the passive microwave case for a layered plane-\/parallel medium. 
+
+The solution is based on the Discrete ordinate approach described by Jin, 1994. While the discrete ordinate method is general, the implementation here is specific to passive microwave configuration with an isotopic medium and considering a Rayleigh phase matrix (i.e. small particules with respect to the wavelength). Under these assumptions the azimuth integration present in the radiative transfer equation can be calculated analytically. It means that other phase matrix form would require significant change in the code. It also implies that using this code for active microwaves is not straightforward, because an explicit treatment of the azimuth is necessary in the active case. (see for instance Picard et al. 2004)
+
+The number of streams n specified as input is the number of streams in the most refringent layer (the one with the largest refractive index). The streams in the other layers are deduced from the streams in the most refractive layer to ensure continuity of the stream. Since total reflexion can occur the number of streams in the other layers is lower or equal to n. Hence, the number of stream emerging from the surface is generally lower than n.
+
+The disortml subroutine computes brightness temperatures. To deduce the emissivity e of the medium, the simplest approach is to use e=Tb/T, but this is only valid when all the layers have the same temperature T (isothermal medium). For non-\/isothermal media, it is recommended to call disortml twice, once with Tbatmodown=1K and once with Tbatmodown=0K, all the other input parameters being similar. The difference between both Tb's is equal to the reflectivity r, i.e. r=1-\/e if the snowpack is semi-\/infinite or the soil is opaque.
+
+REFERENCES:
+
+Jin, Y-\/Q., 1994, \char`\"{}Electromagnetic Scattering Modeling for Quantitative Remote Sensing\char`\"{}, Singapore: World Scientific.
+
+Picard, G., T. Le Toan, S. Quegan, Y. Caraglio, T. Castel, 2004, \char`\"{}Radiative Transfer modeling of cross-\/polarised backscatter from 
+ a pine forest using the discrete ordinate and eigenvalue method\char`\"{}. Transaction on Geoscience and Remote Sensing, Vol 42, No 8, pp.1720-\/1730
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em l} & number of layer. \\
+\hline
+\mbox{\tt in}  & {\em n} & number of stream in the most refringent layer. \\
+\hline
+\mbox{\tt in}  & {\em depth} & depth (in meter) of each layer. \\
+\hline
+\mbox{\tt in}  & {\em temp} & temperature (in Kelvin) in each layer. \\
+\hline
+\mbox{\tt in}  & {\em Ke} & exctinction coefficient (in 1/meter) in each layer. Also called beta in other part of the code. \\
+\hline
+\mbox{\tt in}  & {\em albedo} & single scattering albedo in each layer. \\
+\hline
+\mbox{\tt in}  & {\em eps} & effective dielectric constant in each layer. \\
+\hline
+\mbox{\tt out}  & {\em TbV} & outgoing V-\/polarized brightness temperature (in Kelvin) for each emerging stream. \\
+\hline
+\mbox{\tt out}  & {\em TbH} & outgoing H-\/polarized brightness temperature (in Kelvin) for each emerging stream. \\
+\hline
+\mbox{\tt out}  & {\em outmhu} & cosine angle in the air for each emerging stream. \\
+\hline
+\mbox{\tt in}  & {\em soilp} & parameters for the surface under the deepest layer (soil, ice, ... see \hyperlink{namespacemod__soil}{mod\_\-soil}). \\
+\hline
+\mbox{\tt in}  & {\em frequency} & frequency (Hz). This parameters is required for some models of soil roughness and for dielectric constant calculation. \\
+\hline
+\mbox{\tt in}  & {\em Tbatmodown} & atmosphere downwelling brightness temperature (assumed isotropic radiation pattern). Can be used to compute snow emissivity. \\
+\hline
+\mbox{\tt out}  & {\em profileV} & if present and allocated, the computed profile of upwelling V-\/polarized Tb at the top of each layer (before being transmitted). \\
+\hline
+\mbox{\tt out}  & {\em profileH} & if present and allocated, the computed profile of upwelling H-\/polarized Tb at the top of each layer (before being transmitted). \\
+\hline
+\end{DoxyParams}

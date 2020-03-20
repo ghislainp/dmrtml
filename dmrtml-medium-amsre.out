@@ -1,0 +1,11 @@
+#number of layers:          2
+#total height (m):       3.50
+#mean temperature (K)    250.00
+#mean density (kg/m3)    325.00
+#mean grain radius (microns)    400.00
+# freq trueinc TbV TbH
+   6.9 56.2 249.6 234.5
+  10.7 56.2 249.3 234.2
+  18.7 56.2 247.0 231.2
+  36.5 56.2 231.2 212.7
+  89.0 56.2 178.5 159.6

@@ -1,0 +1,70 @@
+\hypertarget{typemod__soil_1_1soilparams}{
+\section{mod\_\-soil::soilparams Type Reference}
+\label{typemod__soil_1_1soilparams}\index{mod\_\-soil::soilparams@{mod\_\-soil::soilparams}}
+}
+
+
+This type provides information on the soil (type of reflection model, soil properties, ...) used as input of the subroutine \hyperlink{namespacemod__soil_addfafc544d6649e3cf0bec775d55996e}{soil\_\-coefficients\_\-multiangle}. The imodel and temp variables are required. Other variables are used or not depending on imodel (see the code of \hyperlink{namespacemod__soil_addfafc544d6649e3cf0bec775d55996e}{soil\_\-coefficients\_\-multiangle} for details)  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{typemod__soil_1_1soilparams_a1cbd383e6abcd402112b908834a987fe}{
+integer \hyperlink{typemod__soil_1_1soilparams_a1cbd383e6abcd402112b908834a987fe}{imodel}}
+\label{typemod__soil_1_1soilparams_a1cbd383e6abcd402112b908834a987fe}
+
+\begin{DoxyCompactList}\small\item\em Identification number of the soil reflection model. \end{DoxyCompactList}\item 
+\hypertarget{typemod__soil_1_1soilparams_a495717dffe3333dc42980844fd5dcc76}{
+real $\ast$8 \hyperlink{typemod__soil_1_1soilparams_a495717dffe3333dc42980844fd5dcc76}{temp}}
+\label{typemod__soil_1_1soilparams_a495717dffe3333dc42980844fd5dcc76}
+
+\begin{DoxyCompactList}\small\item\em Soil temperature (K) \end{DoxyCompactList}\item 
+\hypertarget{typemod__soil_1_1soilparams_a64281c4db0ced4f7236f7a04c6001e5b}{
+complex $\ast$8 \hyperlink{typemod__soil_1_1soilparams_a64281c4db0ced4f7236f7a04c6001e5b}{eps}}
+\label{typemod__soil_1_1soilparams_a64281c4db0ced4f7236f7a04c6001e5b}
+
+\begin{DoxyCompactList}\small\item\em Effective dielectric constant of the soil. \end{DoxyCompactList}\item 
+\hypertarget{typemod__soil_1_1soilparams_a30179d18e569c2e2a74dea770ec78cb6}{
+real $\ast$8 \hyperlink{typemod__soil_1_1soilparams_a30179d18e569c2e2a74dea770ec78cb6}{sigma}}
+\label{typemod__soil_1_1soilparams_a30179d18e569c2e2a74dea770ec78cb6}
+
+\begin{DoxyCompactList}\small\item\em Surface roughness rms height (m) \end{DoxyCompactList}\item 
+\hypertarget{typemod__soil_1_1soilparams_acbf1724e8b2c386ef99811131a1f7a27}{
+real $\ast$8 \hyperlink{typemod__soil_1_1soilparams_acbf1724e8b2c386ef99811131a1f7a27}{SM}}
+\label{typemod__soil_1_1soilparams_acbf1724e8b2c386ef99811131a1f7a27}
+
+\begin{DoxyCompactList}\small\item\em Soil moisture \mbox{[}0..1\mbox{]}. \end{DoxyCompactList}\item 
+\hypertarget{typemod__soil_1_1soilparams_ad50fa95e7a372fa03d9197d03f7ac284}{
+real $\ast$8 \hyperlink{typemod__soil_1_1soilparams_ad50fa95e7a372fa03d9197d03f7ac284}{sand}}
+\label{typemod__soil_1_1soilparams_ad50fa95e7a372fa03d9197d03f7ac284}
+
+\begin{DoxyCompactList}\small\item\em Sand fraction \mbox{[}0..1\mbox{]}. \end{DoxyCompactList}\item 
+\hypertarget{typemod__soil_1_1soilparams_aa952265c95ca18956ceee9e3acca4f53}{
+real $\ast$8 \hyperlink{typemod__soil_1_1soilparams_aa952265c95ca18956ceee9e3acca4f53}{clay}}
+\label{typemod__soil_1_1soilparams_aa952265c95ca18956ceee9e3acca4f53}
+
+\begin{DoxyCompactList}\small\item\em Clay fraction \mbox{[}0..1\mbox{]}. \end{DoxyCompactList}\item 
+\hypertarget{typemod__soil_1_1soilparams_a684a896033feec22aea18b0ae228faa5}{
+real $\ast$8 \hyperlink{typemod__soil_1_1soilparams_a684a896033feec22aea18b0ae228faa5}{dm\_\-rho}}
+\label{typemod__soil_1_1soilparams_a684a896033feec22aea18b0ae228faa5}
+
+\begin{DoxyCompactList}\small\item\em Dry matter density (kg/m3) \end{DoxyCompactList}\item 
+\hypertarget{typemod__soil_1_1soilparams_afea41ec6e00a7352bc26f9a931b3bd0a}{
+real $\ast$8 \hyperlink{typemod__soil_1_1soilparams_afea41ec6e00a7352bc26f9a931b3bd0a}{Q}}
+\label{typemod__soil_1_1soilparams_afea41ec6e00a7352bc26f9a931b3bd0a}
+
+\begin{DoxyCompactList}\small\item\em Polarization mixing effects. \end{DoxyCompactList}\item 
+\hypertarget{typemod__soil_1_1soilparams_a43cf4ef29c31920e20447804c917473e}{
+real $\ast$8 \hyperlink{typemod__soil_1_1soilparams_a43cf4ef29c31920e20447804c917473e}{N}}
+\label{typemod__soil_1_1soilparams_a43cf4ef29c31920e20447804c917473e}
+
+\begin{DoxyCompactList}\small\item\em Modulation of reflectivity as a function of angle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This type provides information on the soil (type of reflection model, soil properties, ...) used as input of the subroutine \hyperlink{namespacemod__soil_addfafc544d6649e3cf0bec775d55996e}{soil\_\-coefficients\_\-multiangle}. The imodel and temp variables are required. Other variables are used or not depending on imodel (see the code of \hyperlink{namespacemod__soil_addfafc544d6649e3cf0bec775d55996e}{soil\_\-coefficients\_\-multiangle} for details) 
+
+The documentation for this type was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+soil.f90\end{DoxyCompactItemize}
