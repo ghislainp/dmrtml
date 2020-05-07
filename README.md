@@ -22,12 +22,13 @@ See the examples in the example directoty.
 ## Main and contributing authors :
 
 Ghislain Picard1, Ludovic Brucker1*, Alexandre Roy2, Florent Dupont1,2
-1Insitut des Geosciences de l'Environnement (IGE)
+
+- 1 Insitut des Geosciences de l'Environnement (IGE)
 54 rue Molière - Domaine Universitaire - BP 96
 38402 St Martin d'Hères Cedex, FRANCE
-2Centre d'applications et de recherches en télédétection (CARTEL)
+- 2 Centre d'applications et de recherches en télédétection (CARTEL)
 Université de Sherbrooke
 2500 Bd Université
 Sherbrooke, Qc J1K 2R1 CANADA
-* now at: NASA GSFC, Cryospheric Sciences Lab., code 615 Greenbelt, MD 20771 U.S.A. 
+- (*) now at: NASA GSFC, Cryospheric Sciences Lab., code 615 Greenbelt, MD 20771 U.S.A. 
 
