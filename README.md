@@ -1,8 +1,7 @@
 # dmrtml
 The Dense Media Radiative Transfer - Multi Layers model
 
-
-## What is DMRT-ML ?
+## What is DMRT-ML ?
 
 DMRT-ML is a physical model used to compute the thermal microwave emission of a given snowpack for passive microwave remote sensing applications. The model is based on the Dense Media Radiative Transfer Theory (Tsang, 1992 and Tsang and Kong 2001) and accurately solves the radiative transfer equation using the Discrete Ordinate Method (DISORT, Jin, 1994).
 
