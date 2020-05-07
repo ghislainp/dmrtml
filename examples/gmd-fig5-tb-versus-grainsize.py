@@ -23,8 +23,6 @@
 #----------------------------------------------------------------------------#
 
 import sys
-sys.path.append('..')      # add where dmrtml.py is located
-
 import dmrtml
 from pylab import *
 

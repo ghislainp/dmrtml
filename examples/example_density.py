@@ -25,32 +25,37 @@
 #----------------------------------------------------------------------------#
 
 import sys
-sys.path.append('..')      # add where dmrtml.py is located
 import dmrtml
 from pylab import *
 
 
-freq = 37.0e9                 # frequency : Hz 
-height = array([100.0])       # height : m
-temp = array([250.0])         # temperature : K
-density = array([300.0])      # density : kg.m-3
+freq = 37.0e9                 # frequency unity: Hz 
+height = array([100.0])        # height unity: m
+temp = array([255.0])         # temperature unity: K
+radius = array([100.0])       # radius unity: micrometer
+density = array([350.0])      # density unity: kg.m-3
 dist = False                  # if True => use RAYLEIGH distribution of particles
+
+
+               
 soilp = None
+hold(True)
 
-
-x,y=list(),list()
-for r in arange(100,1000,50):
+for r in arange(100,1000,200):
     radius=array([r])*1e-6
-    res = dmrtml.dmrtml(freq,64,height,density,radius,temp,
-                        tau=dmrtml.NONSTICKY,dist=dist,soilp=soilp)
-    
-    x.append(r)
-    y.append(res.TbV(53))   #/temp[0]) # divide for emissivity instead of Tb
+    x,y=list(),list()
+    for d in arange(100,917,50):
+        density=array([d])
+        res = dmrtml.dmrtml(freq,64,height,density,radius,temp,tau=dmrtml.NONSTICKY,dist=dist,soilp=soilp)
+        
+        x.append(d)
+        y.append(res.TbV(53))  #/temp[0]) for emissivity calculation
+        
+    plot(x,y,label='radius %i microns' % r)
 
-plot(x,y)
-xlabel('Grain size (microns)')
+xlabel('Density (kg/m3)')
 ylabel('Brightness temperature (K)')
-legend()
+legend(loc=4)
 show()
 
 

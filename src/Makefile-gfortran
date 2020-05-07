@@ -1,0 +1,92 @@
+#----------------------------------------------------------------------------#
+#									     #
+# DMRT-ML (Dense Media Radiative Transfer - Multi-Layer)		     #
+# Copyright (c), all rights reserved, 2007-2012,  Ghislain Picard	     #
+# email: Ghislain.Picard@ujf-grenoble.fr				     #
+#									     #
+# Main contributors: Ludovic Brucker, Alexandre Roy, Florent Dupont	     #
+#									     #
+#									     #
+# Licensed under the terms of the GNU General Public License version 3:	     #
+# http://www.opensource.org/licenses/gpl-3.0.html 			     #
+#									     #
+# Recommanded citation:							     #
+# Brucker, L., Picard, G., Arnaud, L., Barnola, JM, Schneebeli, M., 	     #
+#    Brunjail, H., Lefebvre, E., Fily, M. Modeling time series of microwave  #
+#    brightness temperature at Dome C, Antarctica, using vertically resolved #
+#    snow temperature and microstructure measurements, 			     #
+#    Journal of Glaciology, 57(201),171-182, 2011			     #
+#									     #
+#----------------------------------------------------------------------------#
+
+# The compiler command or path
+#
+F90 = gfortran
+
+# F2PY command or path
+# under windows looks like: "
+#
+#F2PY=f2py3                          # unix
+F2PY=f2py                          # unix
+#F2PY=c:\python27\scripts\f2py.py  # for windows
+
+
+# F2PY calls gfortran-> gnu95 and ifort -> intel
+# 
+#
+F2PYCOMPILERS = --fcompiler=gnu95                     # under linux
+#F2PYCOMPILERS = --fcompiler=gnu95 --compiler=mingw32 # under windows
+
+# flags maximum performance
+#
+FCFLAGS = -O3 -cpp
+
+# required libraries
+LIB =-L/usr/lib -lm -lopenblas -llapack
+#LIB =-L$(HOME)/anaconda3/lib -lm -lopenblas -llapack
+LIB =-L$(HOME)/anaconda3/lib -lm -lblas -llapack
+
+
+# required includes
+INCLUDE=
+
+
+#									     #
+#----------------------------------------------------------------------------#
+#									     #
+
+# object to build
+OBJ = czergg.o dielectric_constant.o dmrtparameters.o fresnel.o soil.o disort.o dmrtml.o options.o main.o
+
+# RULES
+#
+default: dmrtml
+
+
+dmrtml: $(OBJ)
+		$(F90) -o $@ $(FCFLAGS) $(OBJ) $(LIB) $(LFLAGS)
+
+pydmrt:
+	$(F2PY) -c $(F2PYCOMPILERS) $(INCLUDE) $(LIB)  --f90flags="$(FCFLAGS)"  --f77flags="$(FCFLAGS)" dmrtml.pyf dmrtml.f90  czergg.f dmrtparameters.F90 soil.f90 fresnel.f90 dielectric_constant.f90 disort.F90
+
+
+clean:
+	rm -f dmrtml *.o *.mod *.MOD dmrtml_for.so
+
+#									     #
+#----------------------------------------------------------------------------#
+# GENERIC RULES                                                              #
+
+
+%.o : %.f90
+	$(F90) $(FCFLAGS) $(INCLUDE) -c $< -o $@
+
+%.o : %.F90
+	$(F90) $(FCFLAGS) $(INCLUDE) -c $< -o $@
+
+%.o : %.F
+	$(F90) $(FCFLAGS) $(INCLUDE) -c $< -o $@
+
+%.o : %.f
+	$(F90) $(FCFLAGS) $(INCLUDE) -c $< -o $@
+

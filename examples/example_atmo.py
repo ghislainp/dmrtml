@@ -25,38 +25,43 @@
 #----------------------------------------------------------------------------#
 
 import sys
-sys.path.append('..')      # add where dmrtml.py is located
 import dmrtml
 from pylab import *
 
 
 freq = 37.0e9                 # frequency unity: Hz 
-height = array([100.0])        # height unity: m
-temp = array([255.0])         # temperature unity: K
-radius = array([100.0])       # radius unity: micrometer
-density = array([350.0])      # density unity: kg.m-3
+height = array([10.0])        # height unity: m
+temp = array([250.0])         # temperature unity: K
+radius = array([800.0e-6])    # radius unity: meter
+density = array([200.0])      # density unity: kg.m-3
 dist = False                  # if True => use RAYLEIGH distribution of particles
 
 
-               
+        
+        
+tbatmodown=1
+        
 soilp = None
-hold(True)
+res_atmo = dmrtml.dmrtml(freq,64,height,density,radius,temp,
+                         tau=dmrtml.NONSTICKY,dist=dist,soilp=soilp,tbatmodown=tbatmodown)
 
-for r in arange(100,1000,200):
-    radius=array([r])*1e-6
-    x,y=list(),list()
-    for d in arange(100,917,50):
-        density=array([d])
-        res = dmrtml.dmrtml(freq,64,height,density,radius,temp,tau=dmrtml.NONSTICKY,dist=dist,soilp=soilp)
-        
-        x.append(d)
-        y.append(res.TbV(53))  #/temp[0]) for emissivity calculation
-        
-    plot(x,y,label='radius %i microns' % r)
+theta = range(0,75)
 
-xlabel('Density (kg/m3)')
+res = dmrtml.dmrtml(freq,64,height,density,radius,temp,
+                    tau=dmrtml.NONSTICKY,dist=dist,soilp=soilp,tbatmodown=0)
+
+rv= (res_atmo.TbV(theta) - res.TbV(theta))/tbatmodown
+plot (theta,rv,'bo-',label='V-pol')
+plot (theta,1-res.TbV(theta)/mean(temp))
+
+rh= (res_atmo.TbH(theta) - res.TbH(theta))/tbatmodown
+plot (theta,rh,'ro-',label='H-pol')
+plot (theta,1-res.TbH(theta)/mean(temp))
+
+
+xlabel('Incidence angle (Degree)')
 ylabel('Brightness temperature (K)')
-legend(loc=4)
+legend(loc=2)
 show()
 
 
