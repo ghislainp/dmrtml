@@ -23,7 +23,7 @@
 #----------------------------------------------------------------------------#
 
 
-import dmrtml_for
+from .dmrtml_for import dmrtml_pywrapper, albedobeta_pywrapper, icedielectric_pywrapper, compute_streams_pywrapper
 import numpy
 
 NONSTICKY = 1e6
@@ -41,7 +41,7 @@ def run(freq, n, depth, density, radius, temp, tau=NONSTICKY, fwetness=0, medium
 
     depth, density, radius, temp, tau, fwetness, medium = _clean_parameters(depth, density, radius, temp, tau, fwetness, medium)
 
-    restuple = dmrtml_for.dmrtml_pywrapper(freq, n, depth, density, radius, temp, tau, fwetness, medium, dist,
+    restuple = dmrtml_pywrapper(freq, n, depth, density, radius, temp, tau, fwetness, medium, dist,
                                            soilp.imodel, soilp.temp, soilp.eps[0], soilp.eps[1],
                                            soilp.sigma, soilp.SM, soilp.sand, soilp.clay, soilp.dm_rho,
                                            soilp.Q, soilp.N,
@@ -92,7 +92,7 @@ class DMRTMLResult:
 
 def albedobeta(frequency, density, radius, temp, tau=NONSTICKY, fwetness=0, medium='S', dist=False, grodyapproach=True):
     """compute the albedo and extinction with the DMRT theory"""
-    return dmrtml_for.albedobeta_pywrapper(frequency, density, radius, temp,
+    return albedobeta_pywrapper(frequency, density, radius, temp,
                                            tau, fwetness, medium, dist, grodyapproach)
 
 
@@ -103,7 +103,7 @@ def compute_streams(freq, n, density, radius=0, temp=273,
     depth = numpy.ones_like(density)
     depth, density, radius, temp, tau, fwetness, medium = _clean_parameters(depth, density, radius, temp, tau, fwetness, medium)
 
-    restuple = dmrtml_for.compute_streams_pywrapper(freq, n, density, radius, temp, tau, fwetness, medium, dist)
+    restuple = compute_streams_pywrapper(freq, n, density, radius, temp, tau, fwetness, medium, dist)
     return Streams(restuple)  # ! return mhu,weight,ns,outmhu,ns0
 
 
@@ -114,7 +114,7 @@ class Streams:
 
 
 def ice_dielectric_constant(frequency, temperature):
-    return dmrtml_for.icedielectric_pywrapper(frequency, temperature)
+    return icedielectric_pywrapper(frequency, temperature)
 
 
 class SoilParams:

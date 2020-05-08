@@ -2,9 +2,15 @@
 
 import setuptools
 from numpy.distutils.core import setup, Extension
+from numpy.distutils.system_info import get_info
+from numpy.distutils.misc_util import Configuration
 
+config = Configuration('dmrtml')
 
-libdmrtml = Extension(name='dmrtml_for',
+lapack_info = get_info('lapack_opt')
+blas_info = get_info('blas_opt')
+
+config.add_extension(name='dmrtml_for',
                       sources=[
                             "src/dmrtml.pyf",
                             "src/czergg.f",
@@ -16,11 +22,11 @@ libdmrtml = Extension(name='dmrtml_for',
                             "src/dmrtml.f90",
                             "src/options.f90",
                             "src/main.f90",
-                    ])
+                          ], extra_info=[lapack_info, blas_info])
 
+print(config.todict())
 
 setup(
-    name='DMRTML',
     version='0.1',
     author='Ghislain Picard',
     author_email='ghislain.picard@univ-grenoble-alpes.fr',
@@ -34,8 +40,8 @@ setup(
     long_description='',
     long_description_content_type='text/markdown',
     url="https://github.com/ghislainp/dmrtml",
-    ext_modules=[libdmrtml],
-    packages=['dmrtml'],
+#    packages=['dmrtml'],
     include_package_data=True,
     install_requires=['numpy'],
+    **config.todict()
 )
