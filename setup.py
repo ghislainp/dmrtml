@@ -40,7 +40,7 @@ setup(
     long_description='',
     long_description_content_type='text/markdown',
     url="https://github.com/ghislainp/dmrtml",
-#    packages=['dmrtml'],
+    packages=['dmrtml'],
     include_package_data=True,
     install_requires=['numpy'],
     **config.todict()
