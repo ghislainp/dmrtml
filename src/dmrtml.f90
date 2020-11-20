@@ -113,7 +113,7 @@ subroutine dmrtml(frequency,l,n,depth,density,radius,temperature,&
   complex*16                      :: Eo
   real*8                          :: f,tau_,fwetness_
  
-  if (frequency<1e9) then
+  if (frequency < 0.1e9) then
      print *,'frequency must be given in Hz.',frequency
      stop
   endif
